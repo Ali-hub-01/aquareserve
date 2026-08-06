@@ -143,4 +143,53 @@
       window.open(url, '_blank', 'noopener');
     });
   }
+
+  /* ---------- Лайтбокс сертификатов ---------- */
+  var certButtons = Array.prototype.slice.call(document.querySelectorAll('.cert'));
+  var lightbox = document.getElementById('lightbox');
+  if (lightbox && certButtons.length) {
+    var lbImg = document.getElementById('lightboxImg');
+    var lbClose = document.getElementById('lightboxClose');
+    var lbPrev = document.getElementById('lightboxPrev');
+    var lbNext = document.getElementById('lightboxNext');
+
+    var certData = certButtons.map(function (btn) {
+      var img = btn.querySelector('img');
+      return { src: img.getAttribute('src'), alt: img.getAttribute('alt') };
+    });
+    var current = 0;
+
+    function showCert(i) {
+      current = (i + certData.length) % certData.length;
+      lbImg.setAttribute('src', certData[current].src);
+      lbImg.setAttribute('alt', certData[current].alt);
+    }
+    function openLightbox(i) {
+      showCert(i);
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    certButtons.forEach(function (btn, i) {
+      btn.addEventListener('click', function () { openLightbox(i); });
+    });
+    lbClose.addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', function () { showCert(current - 1); });
+    lbNext.addEventListener('click', function () { showCert(current + 1); });
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowLeft') showCert(current - 1);
+      else if (e.key === 'ArrowRight') showCert(current + 1);
+    });
+  }
 })();
