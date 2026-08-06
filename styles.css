@@ -935,6 +935,13 @@ section[id], [id] { scroll-margin-top: 86px; }
 
   /* Мобильное меню */
   .burger { display: flex; }
+  /* ФИКС: backdrop-filter делал шапку containing block для fixed-меню (drawer),
+     из-за чего меню сжималось по высоте шапки. Убираем blur на мобиле. */
+  .header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.97);
+  }
   .header__nav {
     position: fixed;
     top: 0;
