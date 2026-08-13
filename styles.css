@@ -350,7 +350,7 @@ ul, ol { list-style: none; }
 }
 
 .product__media {
-  height: 120px;
+  aspect-ratio: 3 / 2;
   border-radius: 12px;
   background:
     radial-gradient(120% 140% at 85% 15%, rgba(27, 127, 212, 0.16), transparent 55%),
@@ -371,7 +371,7 @@ ul, ol { list-style: none; }
 .product__media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.4s ease;
 }
 .product:hover .product__media img { transform: scale(1.06); }
