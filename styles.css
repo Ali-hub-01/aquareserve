@@ -415,6 +415,16 @@ ul, ol { list-style: none; }
     radial-gradient(120% 140% at 85% 15%, rgba(27, 127, 212, 0.3), transparent 60%),
     linear-gradient(145deg, #dcebf8 0%, #c9e0f4 100%);
 }
+/* Техническая схема — показываем целиком, не обрезая подписи */
+.product__media--diagram {
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(160deg, #f4f7fa 0%, #e9f0f6 100%);
+}
+.product__media--diagram img {
+  object-fit: contain;
+  padding: 10px;
+}
+.product:hover .product__media--diagram img { transform: scale(1.03); }
 
 /* ---------- Этапы ---------- */
 .process__grid {
